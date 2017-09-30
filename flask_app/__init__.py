@@ -11,7 +11,9 @@ db = SQLAlchemy(app)
 
 
 from .blueprints.vtv import vtvs
+from .blueprints.youtube import youtube
 
 # Blueprint Registration
 app.register_blueprint(vtvs)
+app.register_blueprint(youtube)
 # from . import views

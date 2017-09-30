@@ -8,19 +8,21 @@
         <tr>
             <th>ID</th>
             <th>Title</th>
-            <th>Author</th>
-            <th>Published</th>
-            <th>status</th>
+            <th>Link</th>
+            <th>Category</th>
+            <th>YT ID</th>
+            <th>INS</th>
         </tr>
     </thead>
     <tbody>
-        {% for youtube in youtubes %}
+        {% for vtv in vtvs %}
         <tr>
             <td>{{ vtv.id }}</td>
             <td>{{ vtv.title }}</td>
-            <td>{{ vtv.author }}</td>
-            <td>{{ vtv.published }}</td>
-            <td>{{ vtv.status }}</td>
+            <td>{{ vtv.link }}</td>
+            <td>{{ vtv.category }}</td>
+            <td>{{ vtv.yt_id }}</td>
+            <td>{{ vtv.ins }}</td>
         </tr>
         {% endfor %}
     </tbody>
