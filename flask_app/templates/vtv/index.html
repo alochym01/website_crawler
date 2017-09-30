@@ -1,0 +1,32 @@
+{% extends "layouts/base.html" %}
+<!-- import macro -->
+
+<!-- starting content -->
+{% block content %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Link</th>
+            <th>Category</th>
+            <th>YT ID</th>
+            <th>INS</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vtv in vtvs %}
+        <tr>
+            <td>{{ vtv.id }}</td>
+            <td>{{ vtv.title }}</td>
+            <td>{{ vtv.link }}</td>
+            <td>{{ vtv.category }}</td>
+            <td>{{ vtv.yt_id }}</td>
+            <td>{{ vtv.ins }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{{ pagination.links }}
+<!-- endblock-->
+{% endblock %}
