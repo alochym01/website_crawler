@@ -14,12 +14,13 @@ def index(page):
     total = YOUTUBE.query.count()
     page, per_page, offset = get_page_args(
         page_parameter='page', per_page_parameter='per_page')
-    sql = 'select * from youtubes where status = 0 order by id desc limit {}, {}'.format(
+    sql = 'select * from youtubes order by id desc limit {}, {}'.format(
         offset, per_page)
+    print(sql)
     youtubes = db.engine.execute(sql)
     pagination = Pagination(page=page, per_page=per_page, record_name='youtube',
                             total=total)
-    return render_template('youtube/index.html', youtube=youtubes, per_page=per_page,
+    return render_template('youtube/index.html', youtubes=youtubes, per_page=per_page,
                            page=page, pagination=pagination)
 
 
@@ -32,11 +33,8 @@ def youtube_create():
         title=request.get_json().get('title'),
         yt_videoid=request.get_json().get('yt_videoid')
     )
-    try:
-        db.session.add(youtube)
-        db.session.commit()
-    except:
-        db.session.rollback()
+    db.session.add(youtube)
+    db.session.commit()
     return 'DONE'
 
 
