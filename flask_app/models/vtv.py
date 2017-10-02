@@ -5,17 +5,17 @@ from datetime import datetime
 class VTV(db.Model):
     __tablename__ = 'vtvs'
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.Text, nullable=False)
+    title = db.Column(db.Text, nullable=True)
     yt_id = db.Column(db.String(20), nullable=True, default='')
     yt_status = db.Column(db.String(20), nullable=True, default=0)
-    link = db.Column(db.String(2000), nullable=False, unique=True)
+    link = db.Column(db.String(2000), unique=True)
     category = db.Column(db.String(20), nullable=True)
     description = db.Column(db.Text, nullable=True)
-    link_mp4 = db.Column(db.String(2000), nullable=False, unique=True)
+    link_mp4 = db.Column(db.String(2000), nullable=True)
     ins = db.Column(db.Integer, default=datetime.utcnow().strftime('%Y%m%d'))
     source = db.Column(db.String(20), nullable=True, default='vtv')
     tags = db.Column(db.String(200), nullable=True)
-    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    # created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(self, title, link, category, description, link_mp4, tags):
         self.title = title
