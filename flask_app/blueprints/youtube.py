@@ -30,7 +30,7 @@ def youtube_create():
         published=request.get_json().get('published'),
         description=request.get_json().get('description'),
         title=request.get_json().get('title'),
-        yt_videoid=request.get_json().get('videoid')
+        yt_videoid=request.get_json().get('yt_videoid')
     )
     try:
         db.session.add(youtube)
