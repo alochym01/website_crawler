@@ -7,22 +7,22 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>Author</th>
+            <th>YT Video</th>
             <th>Title</th>
-            <th>Link</th>
-            <th>Category</th>
-            <th>YT ID</th>
-            <th>INS</th>
+            <th>Status</th>
+            <th>Published</th>
         </tr>
     </thead>
     <tbody>
-        {% for vtv in vtvs %}
+        {% for yt in youtubes %}
         <tr>
-            <td>{{ vtv.id }}</td>
-            <td>{{ vtv.title }}</td>
-            <td>{{ vtv.link }}</td>
-            <td>{{ vtv.category }}</td>
-            <td>{{ vtv.yt_id }}</td>
-            <td>{{ vtv.ins }}</td>
+            <td>{{ yt.id }}</td>
+            <td>{{ yt.author }}</td>
+            <td>{{ yt.yt_videoid }}</td>
+            <td>{{ yt.title }}</td>
+            <td>{{ yt.status }}</td>
+            <td>{{ yt.published }}</td>
         </tr>
         {% endfor %}
     </tbody>
