@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect
 from flask_paginate import Pagination, get_page_args
 
 from flask_app import db
@@ -43,3 +43,12 @@ def vtvs_create():
     db.session.add(vtv)
     db.session.commit()
     return 'DONE'
+
+
+@vtvs.route('/vtvs/update/<int:id>', methods=['GET'])
+def vtvs_update(id):
+    vtv = VTV.query.filter_by(id=id).first()
+    vtv.yt_status = 1
+    db.session.add(vtv)
+    db.session.commit()
+    return redirect(request.referrer)

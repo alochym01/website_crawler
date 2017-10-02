@@ -19,9 +19,10 @@
         <tr>
             <td>{{ vtv.id }}</td>
             <td>{{ vtv.title }}</td>
-            <td>{{ vtv.link }}</td>
+            <td class='alochym'><a href="{{ vtv.link }}">{{ vtv.link }}</a></td>
             <td>{{ vtv.yt_id }}</td>
             <td>{{ vtv.ins }}</td>
+            <td><a type="button" class="btn btn-danger" href="{{url_for('vtvs.vtvs_update', id=vtv.id)}}">YT</a></td>
         </tr>
         {% endfor %}
     </tbody>
