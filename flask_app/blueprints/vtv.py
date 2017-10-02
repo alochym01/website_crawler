@@ -22,6 +22,14 @@ def index(page):
                            page=page, pagination=pagination)
 
 
+@vtvs.route('/vtvs/test', methods=['POST'])
+def vtvs_test():
+    missing = VTV.query.filter_by(link=request.get_json().get('link')).first()
+    if missing is None:
+        return '1'
+    return '0'
+
+
 @vtvs.route('/vtvs/create', methods=['POST'])
 def vtvs_create():
     vtv = VTV(
@@ -32,9 +40,6 @@ def vtvs_create():
         link_mp4=request.get_json().get('link_mp4'),
         tags=request.get_json().get('tags')
     )
-    try:
-        db.session.add(vtv)
-        db.session.commit()
-    except:
-        db.session.rollback()
+    db.session.add(vtv)
+    db.session.commit()
     return 'DONE'
