@@ -8,7 +8,7 @@ class VTV(db.Model):
     title = db.Column(db.Text, nullable=True)
     yt_id = db.Column(db.String(20), nullable=True, default='')
     yt_status = db.Column(db.String(20), nullable=True, default=0)
-    link = db.Column(db.Text, unique=True)
+    link = db.Column(db.String(255), unique=True)
     category = db.Column(db.String(20), nullable=True)
     description = db.Column(db.Text, nullable=True)
     link_mp4 = db.Column(db.Text, nullable=True)
