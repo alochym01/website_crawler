@@ -1,0 +1,15 @@
+[Unit]
+Description=uWSGI instance to serve FLASK
+After=network.target
+
+[Service]
+User=hadn
+Group=nginx
+WorkingDirectory=/home/hadn/website_crawler
+Environment="PATH=/home/hadn/py4code/bin
+ExecStart=/home/hadn/py4code/bin/uwsgi --ini uwsgi.ini
+#ExecStart=/home/hadn/py4code/bin/uwsgi --ini uwsgi.ini --catch-exceptions
+#StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
