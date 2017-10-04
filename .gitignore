@@ -2,3 +2,5 @@ config/app.db
 __pycache__
 .vscode
 /migrations
+/download_file
+/crawlers
