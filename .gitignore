@@ -4,4 +4,4 @@ __pycache__
 /migrations
 /download_file
 /crawlers
-instance/settings.py
+instance
