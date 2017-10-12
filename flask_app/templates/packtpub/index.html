@@ -1,0 +1,26 @@
+{% extends "layouts/base.html" %}
+<!-- import macro -->
+
+<!-- starting content -->
+{% block content %}
+<table class="table table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>ISBN</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for packtpub in packtpubs %}
+        <tr>
+            <th scope="row">{{ packtpub.id }}</td>
+            <td><a href="{{ "https://cloud.mail.ru/public/N2xG/S7kduwHmt/courses/%s" % packtpub.isbn }}" target="_blank">{{ packtpub.title }}</a></td>
+            <td>{{ packtpub.isbn }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{{ pagination.links }}
+<!-- endblock-->
+{% endblock %}

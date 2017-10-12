@@ -19,7 +19,9 @@ db = SQLAlchemy(app)
 # import blueprints after initial db
 from .blueprints.vtv import vtvs
 from .blueprints.youtube import youtube
+from .blueprints.packtpub import packtpubs
 
 # Blueprint Registration
 app.register_blueprint(vtvs)
 app.register_blueprint(youtube)
+app.register_blueprint(packtpubs)
