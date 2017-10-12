@@ -10,7 +10,6 @@ packtpubs = Blueprint('packtpubs', __name__)
 @packtpubs.route('/packtpubs', defaults={'page': 1})
 @packtpubs.route('/pactpubs/<int:page>')
 def index(page):
-    print(current_app.config)
     total = PACKTPUB.query.count()
     page, per_page, offset = get_page_args(
         page_parameter='page', per_page_parameter='per_page')
@@ -32,3 +31,11 @@ def packtpubs_create():
     db.session.add(packtpub)
     db.session.commit()
     return 'DONE'
+
+
+# @packtpubs.route('/packtpubs/search')
+# def search():
+    # num_posts = min(request.args.get('limit', 10), 50)
+    # query = request.args.get('q', '')
+    # results = PACKTPUB.query.search('SDK')
+    # return results

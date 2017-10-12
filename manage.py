@@ -11,10 +11,12 @@ app.config.from_object('config.settings')
 app.config.from_pyfile('settings.py', silent=True)
 
 # initial database
-db = SQLAlchemy()
+db = SQLAlchemy(app)
 
 # import all models right here
 from flask_app.models.vtv import *
+from flask_app.models.youtube import *
+from flask_app.models.packtpub import *
 
 # initial migrate
 migrate = Migrate(app, db)
