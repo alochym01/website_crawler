@@ -24,3 +24,4 @@ class VTV(db.Model):
         self.description = description
         self.link_mp4 = link_mp4
         self.tags = tags
+        self.ins = datetime.utcnow().strftime('%Y%m%d')

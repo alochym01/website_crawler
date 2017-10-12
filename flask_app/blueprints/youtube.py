@@ -1,26 +1,20 @@
-from flask import Blueprint, render_template, request, redirect, url_for
-from flask_paginate import Pagination, get_page_args
-
-from flask_app import db, celery_app
-from flask_app.models.youtube import YOUTUBE
-from flask_app.forms import YoutubeForm
-import json
-from pytube import YouTube
-
-from subprocess import Popen, PIPE
 import json
 import os
+import re
 import shlex
 from random import randint
-import re
+from subprocess import PIPE, Popen
 
-import os
+from flask import Blueprint, redirect, render_template, request, url_for
+from flask_paginate import Pagination, get_page_args
+from pytube import YouTube
+
+from flask_app import celery_app, db
+from flask_app.forms import YoutubeForm
+from flask_app.models.youtube import YOUTUBE
 
 TOP_LEVEL_DIR = os.path.abspath(os.curdir)
 
-from celery.utils.log import get_task_logger
-
-logger = get_task_logger(__name__)
 
 youtube = Blueprint('youtube', __name__)
 
@@ -35,10 +29,9 @@ def index(page):
         offset, per_page)
     print(sql)
     youtubes = db.engine.execute(sql)
-    pagination = Pagination(page=page, per_page=per_page, record_name='youtube',
-                            total=total)
-    return render_template('youtube/index.html', youtubes=youtubes, per_page=per_page,
-                           page=page, pagination=pagination)
+    pagination = Pagination(css_framework='bootstrap4', page=page, total=total,
+                            alignment='center', per_page=per_page, record_name='youtube')
+    return render_template('youtube/index.html', youtubes=youtubes, page=page, per_page=per_page, pagination=pagination)
 
 
 @youtube.route('/video/create', methods=['POST'])
@@ -50,18 +43,14 @@ def youtube_create():
         title=request.get_json().get('title'),
         yt_videoid=request.get_json().get('yt_videoid')
     )
-    youtube.id = 1
-    # db.session.add(youtube)
-    # db.session.commit()
-    print(youtube.id)
+    db.session.add(youtube)
+    db.session.commit()
     msg = {
         "id": youtube.id,
         'title': youtube.title,
         'yt_videoid': youtube.yt_videoid
     }
     upload_youtube.delay(msg)
-    # print(logger)
-    # print(msg)
     return 'DONE'
 
 

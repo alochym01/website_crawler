@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, current_app
 from flask_paginate import Pagination, get_page_args
 
 from flask_app import db
@@ -10,14 +10,15 @@ vtvs = Blueprint('vtvs', __name__)
 @vtvs.route('/', defaults={'page': 1})
 @vtvs.route('/<int:page>')
 def index(page):
+    print(current_app.config)
     total = VTV.query.count()
     page, per_page, offset = get_page_args(
         page_parameter='page', per_page_parameter='per_page')
     sql = 'select * from vtvs where yt_status = 0 order by id desc limit {}, {}'.format(
         offset, per_page)
     vtvs = db.engine.execute(sql)
-    pagination = Pagination(page=page, per_page=per_page, record_name='vtvs',
-                            total=total)
+    pagination = Pagination(css_framework='bootstrap4', page=page, alignment='center',
+                            per_page=per_page, record_name='vtvs', total=total)
     return render_template('vtv/index.html', vtvs=vtvs, per_page=per_page,
                            page=page, pagination=pagination)
 
@@ -52,3 +53,7 @@ def vtvs_update(id):
     db.session.add(vtv)
     db.session.commit()
     return redirect(request.referrer)
+
+
+def get_css_framework():
+    return current_app.config.get('CSS_FRAMEWORK', 'bootstrap4')
