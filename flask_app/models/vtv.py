@@ -12,7 +12,7 @@ class VTV(db.Model):
     category = db.Column(db.String(20), nullable=True)
     description = db.Column(db.Text, nullable=True)
     link_mp4 = db.Column(db.Text, nullable=True)
-    ins = db.Column(db.Integer, default=datetime.utcnow().strftime('%Y%m%d'))
+    ins = db.Column(db.Integer, default='')
     source = db.Column(db.String(20), nullable=True, default='vtv')
     tags = db.Column(db.Text, nullable=True)
     # created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
