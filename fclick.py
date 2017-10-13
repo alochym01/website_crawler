@@ -2,7 +2,6 @@ from flask_app import app, db
 from flask_app.models.youtube import YOUTUBE
 from flask_app.models.packtpub import PACKTPUB
 from flask_app.models.vtv import VTV
-import sqlalchemy_utils
 from flask_migrate import Migrate
 import click
 
